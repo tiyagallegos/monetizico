@@ -123,8 +123,8 @@ def register(request):
               email = user_form.cleaned_data['email'],
               password = user_form.cleaned_data['password'],
               first_name = user_form.cleaned_data['first_name'],
-              last_name = user_form.cleaned_data['last_name']
-            )
+              last_name = user_form.cleaned_data['last_name'],
+              avatar = user_form.cleaned_data['avatar'])
             user.save()
             profile = profile_form.save(commit=False)
             profile.user = user
