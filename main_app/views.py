@@ -104,14 +104,14 @@ def about(request):
 def profile(request):
   return render(request, 'profile.html') 
 
-class UpdateProfile(LoginRequiredMixin, UpdateView):
-  model = Profile
-  fields = ['user', 'bio', 'avatar', 'birth_date']
+#class UpdateProfile(LoginRequiredMixin, UpdateView):
+ # model = Profile
+ # fields = ['user', 'bio', 'avatar', 'birth_date']
 
 
-class DeleteProduct(LoginRequiredMixin, DeleteView):
-  model = Profile
-  success_url = '/'
+#class DeleteProduct(LoginRequiredMixin, DeleteView):
+ # model = Profile
+ # success_url = '/'
 
 
 
@@ -119,8 +119,8 @@ class DeleteProduct(LoginRequiredMixin, DeleteView):
 def register(request):
 
     if request.method == 'POST':
-        user_form = UserForm(request.POST, request.FILES)
-        profile_form = ProfileForm(request.POST, request.FILES)
+        user_form = UserForm(request.POST)
+        profile_form = ProfileForm(request.POST)
         if user_form.is_valid() and profile_form.is_valid() and user_form.cleaned_data['password'] == user_form.cleaned_data['password_confirm']:
             user = User.objects.create_user(
               username = user_form.cleaned_data['username'],

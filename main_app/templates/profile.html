@@ -4,39 +4,40 @@
 {% endblock %}
 {% block content %}
 <br><br>
-<div class="container">
+<div class="container profile-container">
 <div class="tile is-parent">
-    <article class="tile is-child notification is-lblue">
-      <p class="title">My Profile</p>
+    <article class="tile is-child notification profile-article">
+      <p class="profile-title title is-2">{{ user.first_name|capfirst }}'s Profile</p>
       
       <div class="card-content">
         <div class="media">
           <div class="media-left">
-            <figure class="image is-40x40">
-              <img src="{{user.profile.avatar}}" alt="Placeholder image">
+            <figure class="image is-20x20">
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcT9lI_0JJXTMfJEfLPT22tJtoGD-E3U9Xh6Mg&usqp=CAU" alt="Placeholder image">
             </figure>
           </div>
           <div class="media-content">
-            <p class="title is-4">{{user.first_name|capfirst}}{{user.last_name|capfirst}}</p>
-            <p class="subtitle is-6">Username:{{user.username|capfirst}} </p>
+            <p class="title is-4">Name: {{user.first_name|capfirst}} {{user.last_name|capfirst}}</p><br>
+            <p class="title is-4">Username:{{user.username|capfirst}} </p><br>
+            <p class="title is-size-4">Birthdate: {{user.profile.birth_date}} </p>
           </div>
-        </div>
-    
-        <p class="subtitle">Birthdate: {{user.profile.birth_date}} </p>
+        </div><br><br>
         
-        <div class="content">
-          {{user.profile.bio}}
-        </div>
-      </div>
+        <div class="content subtitle is-4 profile-bio">
+            <label class="has-text-weight-bold">Bio:</label><br>
+            {{user.profile.bio}}
+        </div><br>
+        <div class="has-text-centered is-3">
+        <button type="submit" class="button is-warning is-size-4">Edit Profile</button>
+        </div>    
+       </div>
+    </article>
     </div>
   </div>
-
   
-      <div class="content">
-        <!-- Content -->
-      </div>
-    </article>
-  </div>
+  <div cla></div>
+  <div class="container product-container column is-12 is-center">
+  <div class="tile is-parent del-product">
   <form action="{% url 'delete_product' %}" method="post">
     {% csrf_token %}
     <div class="field">
@@ -54,9 +55,10 @@
             </span>
         </p>
     </div>
-    <button type="submit" class="button is-danger">Delete</button>
+    <button type="submit" class="button is-danger has-text-centered">Delete Product</button>
 </form>
-
 </div>
+</div>
+
 
 {% endblock %}

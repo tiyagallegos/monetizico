@@ -101,3 +101,17 @@ body {
   display: flex;
   justify-content: center;
 }
+.profile-title {
+  color: white !important;
+  text-shadow: 2px 2px 5px rgb(173, 173, 173);
+}
+
+.profile-article {
+  background-color: var(--lblue) !important;
+  color: white;
+}
+
+.del-product {
+  background-color: var(--yellow) !important;
+  color: white;
+}
