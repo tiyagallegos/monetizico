@@ -5,7 +5,7 @@
 {% block content %}
 <div class="register">
   <h1 class="title">REGISTER YOUR ACCOUNT</h1>
-  <form class="register-form" enctype="multipart/form-data" method="post" action="">  
+  <form class="register-form" enctype="multipart/form-data" method="POST" action="">  
       {% csrf_token %}
       <div class="field">
         <label class="label">Username:</label>
@@ -79,7 +79,23 @@
           </span>
         </div>
       </div>
-
+      
+      <div class="file">
+        <label class="file-label">
+          <input class="file-input" type="file" name="avatar">
+          <span class="file-cta">
+            <span class="file-icon">
+              <i class="fas fa-upload"></i>
+            </span>
+            <span class="file-label">
+              Choose a file…
+            </span>
+          </span>
+        </label>
+      </div>
+      
+      
+      <!----
       <div class="file has-name">
         <label class="file-label">
           <input type="file" name="avatar" maxlength="100" id="avatar" class="file-input">
@@ -90,7 +106,8 @@
           </span>
         </label>
       </div>
-
+      ---->
+      
       <br> 
       <div class="field birth_date">
       <label class="label" for="id_birth_date">Birth date:</label> 

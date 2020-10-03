@@ -29,4 +29,7 @@ urlpatterns = [
     path('successemail/', successView, name='successemail'),
     path('search/', SearchResultsView.as_view(template_name='post_list.html'), name='post_list'),
     path('tags/', TagSearchView.as_view(template_name='tag_search.html'), name='tag_search'),
+
+    path('profile/<int:pk>/update', views.UpdateProduct.as_view(), name='UpdateProduct'),
+    path('profile/<int:pk>/delete', views.DeleteProduct.as_view(), name='DeleteProduct'),
 ]
