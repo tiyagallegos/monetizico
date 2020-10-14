@@ -28,7 +28,11 @@ TAGS = (
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.TextField(max_length=1000, blank=True)
+<<<<<<< HEAD
     avatar = models.ImageField(upload_to=storage)
+=======
+    avatar = models.ImageField(upload_to=storage, default='img/user.svg')
+>>>>>>> d27f02ac8edd00d03b4e519c519f639c59d06477
     birth_date = models.DateField(null=True, blank=True)
 
 class Product(models.Model):

@@ -1,11 +1,16 @@
 {% extends "base.html" %}
+{% load widget_tweaks %}
 {% block title %}
-    Monetizico | Register
+  Exchange 🔺 | Register
 {% endblock %}
 {% block content %}
 <div class="register">
   <h1 class="title">REGISTER YOUR ACCOUNT</h1>
+<<<<<<< HEAD
   <form class="register-form" enctype="multipart/form-data" method="POST" action="">  
+=======
+  <form class="register-form" enctype="multipart/form-data" action="" method="POST">
+>>>>>>> d27f02ac8edd00d03b4e519c519f639c59d06477
       {% csrf_token %}
       <div class="field">
         <label class="label">Username:</label>
@@ -79,6 +84,7 @@
           </span>
         </div>
       </div>
+<<<<<<< HEAD
       
       <div class="file">
         <label class="file-label">
@@ -105,6 +111,14 @@
             </span>
           </span>
         </label>
+=======
+
+      <div class="field">
+        <label class="label">Upload Avatar: </label> 
+        <div class="file has-name control field">
+            {{ profile_form.avatar|add_class:"file-cta" }}
+        </div>
+>>>>>>> d27f02ac8edd00d03b4e519c519f639c59d06477
       </div>
       ---->
       

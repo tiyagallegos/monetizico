@@ -17,6 +17,7 @@ from django.contrib.postgres.search import SearchQuery
 from .models import Product, Cart, Post, User
 from .forms import ProfileForm, UserForm, ContactForm
 from datetime import date, timedelta
+from django.db.models import Q
 import uuid
 import boto3
 import stripe
@@ -81,12 +82,16 @@ class PostDetail(DetailView):
 class AddPost(LoginRequiredMixin, CreateView):
   model = Post
   fields = ['product']
-
-  #FIXME: Add a way to limit the user if a product is already active
   
   def get_form(self, form_class=None):
     form = super().get_form(form_class=None)
+    active_posts = Post.objects.filter(active=True)
+    products = []
+    for post in active_posts:
+      products.append(post.product.id)
     form.fields['product'].queryset = form.fields['product'].queryset.filter(seller = self.request.user)
+    for i in range(len(products)):
+      form.fields['product'].queryset = form.fields['product'].queryset.exclude(id=products[i])
     return form
     
   def form_valid(self, form):
@@ -120,7 +125,7 @@ def register(request):
 
     if request.method == 'POST':
         user_form = UserForm(request.POST)
-        profile_form = ProfileForm(request.POST)
+        profile_form = ProfileForm(request.POST or None, request.FILES or None)
         if user_form.is_valid() and profile_form.is_valid() and user_form.cleaned_data['password'] == user_form.cleaned_data['password_confirm']:
             user = User.objects.create_user(
               username = user_form.cleaned_data['username'],
@@ -131,11 +136,12 @@ def register(request):
               )
             user.save()
             profile = profile_form.save(commit=False)
+            print(profile)
             profile.user = user
             profile.save()
             login(request, user)
             messages.success(request, f"Your profile was successfully created!")
-            return redirect('home') #FIXME: redirect to profile page
+            return redirect('profile') 
     else:
             user_form = UserForm()
             profile_form = ProfileForm()
@@ -187,7 +193,7 @@ def get_products(products):
 @csrf_exempt
 def create_checkout_session(request):
   if request.method == 'GET':
-    domain_url = 'http://localhost:8000/'
+    domain_url = 'https://cyberpunk-exchange.herokuapp.com/'
     stripe.api_key = settings.STRIPE_SECRET_KEY
     try:
       products = Cart.objects.filter(user=request.user)
